@@ -1,6 +1,7 @@
 import { SearchState } from "@/pages/SearchPage";
 import { Restaurant, RestaurantSearchResponse } from "@/types";
 import { useQuery } from "react-query";
+import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -41,8 +42,11 @@ export const useSearchRestaurants = (
       `${API_BASE_URL}/api/restaurant/search/${city}?${params.toString()}`
     );
 
+    
+    
     if (!response.ok) {
-      throw new Error("Failed to get restaurant");
+      // throw new Error("Failed to get restaurant");
+      toast.error(`There is no restaurant in ${city} yet.`)
     }
 
     return response.json();
